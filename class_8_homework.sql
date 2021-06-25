@@ -23,7 +23,7 @@ join customers on customers.id = orders.customer_id
 where orders.cost > 100;
 
 --Change the topping of onions to anchovies on three orders from bexley
-update top(100) orders_toppings 
+update top(3) orders_toppings 
 set topping_id = (select id from toppings where name = 'anchovies')
 from customers 
 join orders on customers.id = orders.customer_id
