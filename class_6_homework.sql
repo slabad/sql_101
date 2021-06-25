@@ -25,3 +25,7 @@ alter table pizzas add base_price money;
 --Update the base price of each pizza size
 update pizzas 
 set base_price = pizza_size_inches * 0.75;
+
+--Advanced: Add a column to the orders table that will allow us to track the size of the pizza ordered.
+alter table orders add pizza_id int references pizzas(id)
+
