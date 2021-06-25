@@ -41,4 +41,29 @@ where cost_per_one_weight=(
 --How many customers are there?
 select 
 	count(*) 
-from customers
+from customers;
+
+--What is the longest first name of a customer?
+select top 2 first_name 
+from customers 
+order by len(first_name) 
+desc; 
+--(Top 2 to check for a tie, top 1 would also work)
+
+--What last name shows up the most in the customers table?
+select top 1 last_name 
+from customers 
+group by last_name 
+order by count(*) desc;
+
+--How many different cities are used in the customers table?
+select city 
+from customers 
+group by city;
+
+
+How much do all the orders cost together?
+select sum(cost) from orders
+
+Advanced:  How much do anchovies increase the cost of a 16" Pizza?
+select cost_per_one_weight * weight_16 from toppings where name='anchovies';

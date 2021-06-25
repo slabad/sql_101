@@ -54,3 +54,50 @@ join customers on orders.customer_id=customers.id
 group by first_name, last_name	
 order by count(*) desc
 
+
+--Which City was delivered to the most times?
+select top 3 
+    city
+  , count(*) 
+from customers 
+join orders on customers.id=orders.customer_id 
+where delivery = 1 
+group by city 
+order by count(*) desc 
+--(top 3 incase of a tie)
+
+--What are the five most ordered toppings?
+select top 7 
+    name
+  , count(*) 
+from toppings 
+join orders_toppings on toppings.id=orders_toppings.topping_id 
+group by name 
+order by count(*) desc
+
+--What are the all the toppings that  Bob Stark has ordered?
+select 
+  name 
+from toppings 
+join orders_toppings on toppings.id=orders_toppings.topping_id 
+join orders on orders.id=orders_toppings.order_id 
+join customers on orders.customer_id=customers.id 
+where first_name='bob' 
+  and last_name='stark' 
+group by name
+
+--What is the address of the customer that has ordered the most non-delivery orders?
+select top 3 
+    address_line_1
+  , city,state
+  , zip
+  , customers.id
+  , count(*) 
+from customers 
+join orders on customers.id=orders.customer_id 
+where delivery = 0 
+group by address_line_1, city, state, zip, customers.id 
+order by count(*) 
+desc --(top 3 incase of a tie)
+
+
